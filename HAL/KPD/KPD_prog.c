@@ -36,9 +36,9 @@ void KPD_voidInit()
 u8 KPD_u8_GetKey()
 {
 	u8 button_pressed = 50;
-	u8 buttons_elements[ROWS_SIZE][COLUMNS_SIZE] = {{1, 2, '+'},
-													{3, 4, '-'}, 
-													{'C', 0, '='}} ;
+	u8 buttons_elements[ROWS_SIZE][COLUMNS_SIZE] = {{1, 2, 3},
+													{4, 5, 6}, 
+													{7, 8, 9}} ;
 	u8 ROWS_arr[ROWS_SIZE] = {KPD_R0, KPD_R1, KPD_R2};
 	u8 COLS_arr[COLUMNS_SIZE] = {KPD_C0, KPD_C1, KPD_C2};
 		
