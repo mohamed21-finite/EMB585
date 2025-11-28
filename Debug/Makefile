@@ -44,7 +44,8 @@ SUBDIRS :=  \
 ../MCAL/DIO \
 ../MCAL/GI \
 ../MCAL/EXTI \
-../MCAL/ADC
+../MCAL/ADC \
+../MCAL/TIM0/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
@@ -57,7 +58,8 @@ C_SRCS +=  \
 ../MCAL/ADC/ADC_prog.c \
 ../MCAL/DIO/DIO_prog.c \
 ../MCAL/EXTI/EXTI_prog.c \
-../MCAL/GI/GI_prog.c
+../MCAL/GI/GI_prog.c \
+../MCAL/TIM0/TIM0_prog.c
 
 
 PREPROCESSING_SRCS += 
@@ -75,7 +77,8 @@ HAL/SSD/SSD_prog.o \
 MCAL/ADC/ADC_prog.o \
 MCAL/DIO/DIO_prog.o \
 MCAL/EXTI/EXTI_prog.o \
-MCAL/GI/GI_prog.o
+MCAL/GI/GI_prog.o \
+MCAL/TIM0/TIM0_prog.o
 
 OBJS_AS_ARGS +=  \
 APP/main.o \
@@ -86,7 +89,8 @@ HAL/SSD/SSD_prog.o \
 MCAL/ADC/ADC_prog.o \
 MCAL/DIO/DIO_prog.o \
 MCAL/EXTI/EXTI_prog.o \
-MCAL/GI/GI_prog.o
+MCAL/GI/GI_prog.o \
+MCAL/TIM0/TIM0_prog.o
 
 C_DEPS +=  \
 APP/main.d \
@@ -97,7 +101,8 @@ HAL/SSD/SSD_prog.d \
 MCAL/ADC/ADC_prog.d \
 MCAL/DIO/DIO_prog.d \
 MCAL/EXTI/EXTI_prog.d \
-MCAL/GI/GI_prog.d
+MCAL/GI/GI_prog.d \
+MCAL/TIM0/TIM0_prog.d
 
 C_DEPS_AS_ARGS +=  \
 APP/main.d \
@@ -108,7 +113,8 @@ HAL/SSD/SSD_prog.d \
 MCAL/ADC/ADC_prog.d \
 MCAL/DIO/DIO_prog.d \
 MCAL/EXTI/EXTI_prog.d \
-MCAL/GI/GI_prog.d
+MCAL/GI/GI_prog.d \
+MCAL/TIM0/TIM0_prog.d
 
 OUTPUT_FILE_PATH +=EM_585.elf
 
@@ -181,6 +187,13 @@ MCAL/EXTI/EXTI_prog.o: ../MCAL/EXTI/EXTI_prog.c
 	
 
 MCAL/GI/GI_prog.o: ../MCAL/GI/GI_prog.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+MCAL/TIM0/TIM0_prog.o: ../MCAL/TIM0/TIM0_prog.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

@@ -33,7 +33,7 @@ void app2()
 	//LCD_voidSendNumber(count);
 }*/
 
-#define NUM_CHANNELS   3
+/*#define NUM_CHANNELS   3
 u8 password[4] = {1, 2, 3, 4} ;
 u8 button = 0 ;
 Bool passing = F ;
@@ -99,7 +99,37 @@ void ADC_value()
 
 //this is a prototype for the function responsible for get access to the software the body of the function after the main
 void pass_word() ;
+*/
 
+u16 Time = 0 ;
+u16 Time1 = 0 ;
+
+void alarm_display(u16 Time_seconds) ; 
+void TIM0_app()
+{
+	static u16 count = 0 ;
+ 
+	
+	if(count == 0)
+	{
+     		alarm_display(Time1) ;
+	}
+		count++ ;
+	
+	if(count % 1000 == 0)
+	{
+		Time1-- ;
+		alarm_display(Time1) ;
+	}
+	if(count == (Time * 1000))
+	{
+		while(1)
+		{
+		LED_voidon(DIO_PORTB,DIO_PIN0);
+		}
+
+	}
+}
 
 int main(void)
 {
@@ -129,7 +159,7 @@ int main(void)
 	DIO_voidSetPinVal(DIO_PORTD, DIO_PIN6 , HIGH);
 	DIO_voidSetPinVal(DIO_PORTD, DIO_PIN7 , HIGH);*/
 	
-	KPD_voidInit();
+	/*KPD_voidInit();
 	
 	//DIO_voidSetPortDir(DIO_PORTC,0x07);
 	DIO_voidSetPortDir(DIO_PORTA,0xF0);
@@ -151,18 +181,72 @@ int main(void)
 	f32 pir_value = 0; 
 	//LCD_voidSendNumber(1);
 	
-	pass_word();
+	pass_word();*/
+	
+	DIO_voidSetPinDir(DIO_PORTD, DIO_PIN2, INPUT);
+	DIO_voidSetPinDir(DIO_PORTD, DIO_PIN3, INPUT);
+	DIO_voidSetPinDir(DIO_PORTD, DIO_PIN7, INPUT);
+	
+	DIO_voidSetPinVal(DIO_PORTD, DIO_PIN2, HIGH);
+	DIO_voidSetPinVal(DIO_PORTD, DIO_PIN3, HIGH);
+	DIO_voidSetPinVal(DIO_PORTD, DIO_PIN7, HIGH);
+	
+	DIO_voidSetPortDir(DIO_PORTA,0xF0);
+	DIO_voidSetPortDir(DIO_PORTB,0x06);
+	LCD_voidInit();
 	
 	
+	
+	alarm_display(Time1);
+	
+	while(DIO_u8ReadPinVal(DIO_PORTD, DIO_PIN7) == 1 || Time == 0)
+	{
+			if(DIO_u8ReadPinVal(DIO_PORTD, DIO_PIN2) == 0)
+			{
+				while(DIO_u8ReadPinVal(DIO_PORTD, DIO_PIN2) == 0) ;
+				
+				Time += 30 ;
+				Time1 += 30 ;
+				
+				alarm_display(Time1);
+			}
+			else if(DIO_u8ReadPinVal(DIO_PORTD, DIO_PIN3) == 0)
+			{
+				while(DIO_u8ReadPinVal(DIO_PORTD, DIO_PIN3) == 0);
+				if(Time >= 30)
+				{
+					Time -= 30 ;
+					Time1 -= 30 ;
+			
+				}
+				alarm_display(Time1);
+			}
+	}
+	
+		GI_voidEnable();
+		TIM0_voidInit(CTC_MODE);
+		TIM0_voidSetCallBack(TIM0_app, CTC_MODE);
+
 
     /* Replace with your application code */
-	if(passing == T)
-	{
-	LCD_voidSendCommand(1);
+	//if(passing == T)
+	//{
+	//LCD_voidSendCommand(1);
+	//u8 wait = 60 ;
     while (1) 
     {
+		/*alarm_display(wait);
+		wait--;
+		_delay_ms(1000);
 		
-		temperature = (f32) sensor_values[1] * 500 / 1023 ;
+		if(wait == 0)
+		{	
+			alarm_display(wait);
+			while(1){
+			LED_voidon(DIO_PORTB,DIO_PIN0);
+			}
+		}*/
+		/*temperature = (f32) sensor_values[1] * 500 / 1023 ;
 		light_intensity = (f32) sensor_values[2] * 5 / 1023 ;
 		pir_value = (f32) sensor_values[0] * 5 / 1023 ;
 		
@@ -199,17 +283,24 @@ int main(void)
 
 			DIO_voidSetPinVal(DIO_PORTB, DIO_PIN5, LOW);
 		}
-	}
+	}*/
 	}
 }
 
-/*void __vector_1(void)__attribute__((signal));
-void __vector_1(void)
+/*void __vector_11(void)__attribute__((signal));
+void __vector_11(void)
 {
-	LED_voidToggle(DIO_PORTA,DIO_PIN1);
+	static u16 count = 0 ;
+	count++ ;
+	
+	if(count == 490)
+	{
+		LED_voidToggle(DIO_PORTA,DIO_PIN0);
+		count = 0;
+	}
 }*/
 
-void pass_word()
+/*void pass_word()
 {
 	u8 entering_password[4] = {0, 0, 0, 0};
 	
@@ -255,5 +346,101 @@ void pass_word()
 				
 			}
 		}
+	}
+}*/
+
+
+void alarm_display(u16 Time_seconds)
+{
+	u8 hours = 0 ;
+	u8 minutes = 0 ;
+	u8 seconds = 0 ;
+	
+	while(Time_seconds >= 3600)
+	{
+		Time_seconds -= 3600 ;
+		hours++ ;
+	}
+	while(Time_seconds >= 60)
+	{
+		Time_seconds -= 60;
+		minutes++ ;
+	}
+	seconds = Time_seconds ;
+	
+	
+	/*Hours Display*/
+	if(hours < 10 && hours > 0)
+	{
+		LCD_voidGotoXY(0,0);
+		LCD_voidSendNumber(0);
+		LCD_voidGotoXY(1,0);
+		LCD_voidSendNumber(hours);
+		LCD_voidGotoXY(2,0);
+		LCD_voidstring(":");
+	}
+	else if(hours >= 10)
+	{
+			LCD_voidGotoXY(0,0);
+			LCD_voidSendNumber(hours);
+			LCD_voidGotoXY(2,0);
+			LCD_voidstring(":");
+	}
+	else 
+	{
+			LCD_voidGotoXY(0,0);
+			LCD_voidSendNumber(0);
+			LCD_voidGotoXY(1,0);
+			LCD_voidSendNumber(0);
+			LCD_voidGotoXY(2,0);
+			LCD_voidstring(":");
+	}
+	
+	/*Minutes Display*/
+	if(minutes < 10 && minutes > 0)
+	{
+		LCD_voidGotoXY(3,0);
+		LCD_voidSendNumber(0);
+		LCD_voidGotoXY(4,0);
+		LCD_voidSendNumber(minutes);
+		LCD_voidGotoXY(5,0);
+		LCD_voidstring(":");
+	}
+	else if(minutes >= 10)
+	{
+		LCD_voidGotoXY(3,0);
+		LCD_voidSendNumber(minutes);
+		LCD_voidGotoXY(5,0);
+		LCD_voidstring(":");
+	}
+	else
+	{
+		LCD_voidGotoXY(3,0);
+		LCD_voidSendNumber(0);
+		LCD_voidGotoXY(4,0);
+		LCD_voidSendNumber(0);
+		LCD_voidGotoXY(5,0);
+		LCD_voidstring(":");
+	}
+	
+	/*Seconds Display*/
+	if(seconds < 10 && seconds > 0)
+	{
+		LCD_voidGotoXY(6,0);
+		LCD_voidSendNumber(0);
+		LCD_voidGotoXY(7,0);
+		LCD_voidSendNumber(seconds);
+	}
+	else if(seconds >= 10)
+	{
+		LCD_voidGotoXY(6,0);
+		LCD_voidSendNumber(seconds);
+	}
+	else
+	{
+		LCD_voidGotoXY(6,0);
+		LCD_voidSendNumber(0);
+		LCD_voidGotoXY(7,0);
+		LCD_voidSendNumber(0);
 	}
 }

@@ -21,6 +21,7 @@
 #include "../MCAL/EXTI/EXTI_interface.h"
 #include "../MCAL/ADC/ADC_interface.h"
 #include "../MCAL/ADC/ADC_reg.h"
+#include "../MCAL/TIM0/TIM0_interface.h"
 
 #include "../HAL/LCD/LCD_interface.h"
 #include "../HAL/LCD/LCD_config.h"
