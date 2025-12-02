@@ -52,6 +52,24 @@ void TIM0_voidInit(u8 copy_u8mode)
 }
 
 
+void TIM0_voidPWM(u8 copy_u8mode, u8 copy_u8duty) 
+{
+	TCCR0_REG &= 0b11111000 ;
+	TCCR0_REG |= TIM0_prescaler;
+	switch(copy_u8mode)
+	{
+		case FAST_PWM: SET_BIT(TCCR0_REG, 6), SET_BIT(TCCR0_REG, 3);
+					   SET_BIT(TCCR0_REG, 5), CLR_BIT(TCCR0_REG, 4);
+					   OCR0_REG = 2.55 * copy_u8duty; break ;
+					 
+		case PC_PWM:  SET_BIT(TCCR0_REG, 6),  CLR_BIT(TCCR0_REG, 3);
+					  SET_BIT(TCCR0_REG, 5), CLR_BIT(TCCR0_REG, 4);
+					  OCR0_REG = 2.55 * copy_u8duty; break ;
+	}				 
+}			    
+
+
+
 void TIM0_voidSetCallBack(void (*ptr)(void), u8 copy_u8mode)
 {
 	switch(copy_u8mode)

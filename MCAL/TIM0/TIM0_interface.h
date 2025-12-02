@@ -20,10 +20,14 @@
 
 #define OV_MODE   0
 #define CTC_MODE  1
+#define PC_PWM    2
+#define FAST_PWM  3
 
 #define OCR0_VAL  250
 
 void TIM0_voidInit(u8 copy_u8mode);
 void TIM0_voidSetCallBack(void (*ptr)(void), u8 copy_u8mode);
+
+void TIM0_voidPWM(u8 copy_u8mode, u8 copy_u8duty) ;
 
 #endif /* TIM0_INTERFACE_H_ */

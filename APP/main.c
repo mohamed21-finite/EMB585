@@ -101,13 +101,13 @@ void ADC_value()
 void pass_word() ;
 */
 
-u16 Time = 0 ;
+/*u16 Time = 0 ;
 u16 Time1 = 0 ;
 
 void alarm_display(u16 Time_seconds) ; 
 void TIM0_app()
 {
-	static u16 count = 0 ;
+	static u32 count = 0 ;
  
 	
 	if(count == 0)
@@ -130,7 +130,7 @@ void TIM0_app()
 
 	}
 }
-
+*/
 int main(void)
 {
 	
@@ -182,7 +182,7 @@ int main(void)
 	//LCD_voidSendNumber(1);
 	
 	pass_word();*/
-	
+	/*
 	DIO_voidSetPinDir(DIO_PORTD, DIO_PIN2, INPUT);
 	DIO_voidSetPinDir(DIO_PORTD, DIO_PIN3, INPUT);
 	DIO_voidSetPinDir(DIO_PORTD, DIO_PIN7, INPUT);
@@ -195,7 +195,7 @@ int main(void)
 	DIO_voidSetPortDir(DIO_PORTB,0x06);
 	LCD_voidInit();
 	
-	
+
 	
 	alarm_display(Time1);
 	
@@ -213,6 +213,7 @@ int main(void)
 			else if(DIO_u8ReadPinVal(DIO_PORTD, DIO_PIN3) == 0)
 			{
 				while(DIO_u8ReadPinVal(DIO_PORTD, DIO_PIN3) == 0);
+				
 				if(Time >= 30)
 				{
 					Time -= 30 ;
@@ -226,15 +227,20 @@ int main(void)
 		GI_voidEnable();
 		TIM0_voidInit(CTC_MODE);
 		TIM0_voidSetCallBack(TIM0_app, CTC_MODE);
-
+*/
 
     /* Replace with your application code */
 	//if(passing == T)
 	//{
 	//LCD_voidSendCommand(1);
 	//u8 wait = 60 ;
+	
+	
     while (1) 
     {
+		
+		LED_voidToggle(DIO_PORTB, DIO_PIN3);
+		_delay_ms(500);
 		/*alarm_display(wait);
 		wait--;
 		_delay_ms(1000);
