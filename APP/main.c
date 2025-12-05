@@ -234,13 +234,17 @@ int main(void)
 	//{
 	//LCD_voidSendCommand(1);
 	//u8 wait = 60 ;
-	
+	DCMotor_voidInit();
 	
     while (1) 
     {
 		
-		LED_voidToggle(DIO_PORTB, DIO_PIN3);
-		_delay_ms(500);
+			DCMotor_voidForward(100);
+			_delay_ms(10000);
+		
+		//DCMotor_voidStop();
+		//_delay_ms(5000);
+		
 		/*alarm_display(wait);
 		wait--;
 		_delay_ms(1000);

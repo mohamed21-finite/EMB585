@@ -126,6 +126,15 @@
     <Compile Include="APP\main.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\DCMOTOR\DCMOTOR_config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\DCMOTOR\DCMOTOR_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\DCMOTOR\DCMOTOR_prog.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="HAL\KPD\KPD_config.h">
       <SubType>compile</SubType>
     </Compile>
@@ -219,6 +228,7 @@
     <Folder Include="HAL\LED" />
     <Folder Include="HAL\LCD" />
     <Folder Include="HAL\KPD" />
+    <Folder Include="HAL\DCMOTOR" />
     <Folder Include="HAL\SSD" />
     <Folder Include="MCAL" />
     <Folder Include="APP" />

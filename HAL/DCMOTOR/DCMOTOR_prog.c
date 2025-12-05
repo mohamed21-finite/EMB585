@@ -1,0 +1,92 @@
+/*
+ * DCMOTOR_prog.c
+ *
+ * Created: 12/3/2025 6:31:10 PM
+ *  Author: DELL
+ */ 
+#include "../../LIB/BIT_MATH.h"
+#include "../../LIB/STD_TYPE.h"
+#include "../../MCAL/DIO/DIO_interface.h"
+#include "../../MCAL/DIO/DIO_reg.h"
+#include "../../MCAL/TIM0/TIM0_interface.h"
+#include "../../MCAL/TIM0/TIM0_reg.h"
+#include "DCMOTOR_config.h"
+
+void DCMotor_voidInit(void)
+{
+	DIO_voidSetPinDir(RIGHT_MOTOR_PORT,RIGHT_MOTOR_PIN1, OUTPUT);
+	DIO_voidSetPinDir(RIGHT_MOTOR_PORT,RIGHT_MOTOR_PIN2, OUTPUT);
+	
+	DIO_voidSetPinDir(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN1, OUTPUT);
+	DIO_voidSetPinDir(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN2, OUTPUT);
+	
+	DIO_voidSetPinDir(SPEED_PORT, SPEED_PIN, OUTPUT);
+}
+
+
+void DCMotor_voidForward(u8 speed)
+{
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN1, LOW);
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN2, LOW);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN1, LOW);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN2, LOW);
+	
+	TIM0_voidPWM(FAST_PWM, speed);
+	
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN1, HIGH);
+	
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN1, HIGH);
+	
+	DIO_voidSetPinVal(SPEED_PORT, SPEED_PIN, HIGH);
+}
+
+void DCMotor_voidReverse(u8 speed)
+{
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN1, LOW);
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN2, LOW);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN1, LOW);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN2, LOW);
+	
+	TIM0_voidPWM(FAST_PWM, speed);
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN2, HIGH);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN2, HIGH);
+	
+	DIO_voidSetPinVal(SPEED_PORT, SPEED_PIN, HIGH);
+}
+
+void DCMotor_voidLeft(u8 speed)
+{
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN1, LOW);
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN2, LOW);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN1, LOW);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN2, LOW);
+	
+	TIM0_voidPWM(FAST_PWM, speed);
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN1, HIGH);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN2, HIGH);
+	
+	DIO_voidSetPinVal(SPEED_PORT, SPEED_PIN, HIGH);
+}
+
+void DCMotor_voidRight(u8 speed)
+{
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN1, LOW);
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN2, LOW);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN1, LOW);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN2, LOW);
+	
+	TIM0_voidPWM(FAST_PWM, speed);
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN2, HIGH);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN1, HIGH);
+	
+	DIO_voidSetPinVal(SPEED_PORT, SPEED_PIN, HIGH);
+	
+}
+
+void DCMotor_voidStop(void)
+{
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN1, LOW);
+	DIO_voidSetPinVal(RIGHT_MOTOR_PORT, RIGHT_MOTOR_PIN2, LOW);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN1, LOW);
+	DIO_voidSetPinVal(LEFT_MOTOR_PORT, LEFT_MOTOR_PIN2, LOW);
+}

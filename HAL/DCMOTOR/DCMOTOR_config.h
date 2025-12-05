@@ -1,0 +1,29 @@
+/*
+ * DCMOTOR_config.h
+ *
+ * Created: 12/3/2025 6:32:01 PM
+ *  Author: DELL
+ */ 
+
+
+#ifndef DCMOTOR_CONFIG_H_
+#define DCMOTOR_CONFIG_H_
+
+#define SPEED_PORT  DIO_PORTB
+#define SPEED_PIN   DIO_PIN3
+
+#define RIGHT_MOTOR_PORT  DIO_PORTC
+#define LEFT_MOTOR_PORT   DIO_PORTC
+
+#define DCMTOR_EN2_PORT   DIO_PORTD
+#define DCMOTOR_EN2_PIN   DIO_PIN4
+
+#define RIGHT_MOTOR_PIN1   DIO_PIN3
+#define RIGHT_MOTOR_PIN2   DIO_PIN4
+
+#define LEFT_MOTOR_PIN1    DIO_PIN5
+#define LEFT_MOTOR_PIN2    DIO_PIN6
+
+
+
+#endif /* DCMOTOR_CONFIG_H_ */

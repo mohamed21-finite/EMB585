@@ -29,6 +29,9 @@
 #include "../HAL/KPD/KPD_interface.h"
 #include "../HAL/KPD/KPD_config.h"
 
+#include "../HAL/DCMOTOR/DCMOTOR_interface.h"
+#include "../HAL/DCMOTOR/DCMOTOR_config.h"
+
 #define F_CPU 16000000UL
 #include <util/delay.h>
 

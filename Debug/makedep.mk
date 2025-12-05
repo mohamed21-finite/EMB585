@@ -4,6 +4,8 @@
 
 APP\main.c
 
+HAL\DCMOTOR\DCMOTOR_prog.c
+
 HAL\KPD\KPD_prog.c
 
 HAL\LCD\LCD_prog.c
