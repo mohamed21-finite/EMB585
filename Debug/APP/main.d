@@ -4,7 +4,8 @@ APP/main.d APP/main.o: ../APP/main.c ../APP/main.h \
  ../APP/../HAL/LED/LED_interface.h ../APP/../MCAL/DIO/DIO_interface.h \
  ../APP/../MCAL/GI/GI_interface.h ../APP/../MCAL/EXTI/EXTI_interface.h \
  ../APP/../MCAL/ADC/ADC_interface.h ../APP/../MCAL/ADC/ADC_reg.h \
- ../APP/../MCAL/TIM0/TIM0_interface.h ../APP/../HAL/LCD/LCD_interface.h \
+ ../APP/../MCAL/TIM0/TIM0_interface.h \
+ ../APP/../MCAL/TIM1/TIM1_interface.h ../APP/../HAL/LCD/LCD_interface.h \
  ../APP/../HAL/LCD/LCD_config.h ../APP/../HAL/KPD/KPD_interface.h \
  ../APP/../HAL/KPD/KPD_config.h ../APP/../HAL/DCMOTOR/DCMOTOR_interface.h \
  ../APP/../HAL/DCMOTOR/DCMOTOR_config.h \
@@ -38,6 +39,8 @@ APP/main.d APP/main.o: ../APP/main.c ../APP/main.h \
 ../APP/../MCAL/ADC/ADC_reg.h:
 
 ../APP/../MCAL/TIM0/TIM0_interface.h:
+
+../APP/../MCAL/TIM1/TIM1_interface.h:
 
 ../APP/../HAL/LCD/LCD_interface.h:
 

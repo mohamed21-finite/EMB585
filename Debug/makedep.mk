@@ -24,3 +24,5 @@ MCAL\GI\GI_prog.c
 
 MCAL\TIM0\TIM0_prog.c
 
+MCAL\TIM1\TIM1_prog.c
+

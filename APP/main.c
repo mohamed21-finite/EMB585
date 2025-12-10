@@ -7,6 +7,13 @@
 
 #include "main.h"
 
+
+
+/*void app()
+{
+	analog = ADC ;
+	ADC_voidReadChannel_Interrupt(ADC0);
+}*/
 /*u8 count = 0;
 void app0()
 {
@@ -234,13 +241,32 @@ int main(void)
 	//{
 	//LCD_voidSendCommand(1);
 	//u8 wait = 60 ;
-	DCMotor_voidInit();
+	//DIO_voidSetPortDir(DIO_PORTA,0xF0);
+	//DIO_voidSetPortDir(DIO_PORTB,0x0A);
+	//LCD_voidInit();
+	/*
+	DIO_voidSetPinDir(DIO_PORTA, DIO_PIN0, INPUT);
+	DIO_voidSetPinDir(DIO_PORTD, DIO_PIN5, OUTPUT);
+	ADC_voidInit() ;
+	TIM1_voidFastPWMICR() ;
+
+	//GI_voidEnable();
 	
+
+	u16 val = 0;
+	u16 analog = ADC_u16ReadChannel(ADC0);*/
     while (1) 
     {
+		LED_voidToggle(DIO_PORTD, DIO_PIN0);
+		_delay_ms(2000);
 		
-			DCMotor_voidForward(100);
-			_delay_ms(10000);
+		/*analog = ADC_u16ReadChannel(ADC0);
+		val = (2000 + (f32) analog  * 400 * 5 / 1023);
+		
+			TIM1_voidSetOCRVal(val);
+			_delay_ms(500);*/
+			
+			
 		
 		//DCMotor_voidStop();
 		//_delay_ms(5000);
