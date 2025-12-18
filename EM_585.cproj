@@ -231,6 +231,15 @@
     <Compile Include="MCAL\TIM1\TIM1_reg.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\UART\UART_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\UART\UART_prog.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\UART\UART_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="HAL\" />
@@ -246,6 +255,7 @@
     <Folder Include="MCAL\GI" />
     <Folder Include="MCAL\EXTI" />
     <Folder Include="MCAL\ADC" />
+    <Folder Include="MCAL\UART" />
     <Folder Include="MCAL\TIM1" />
     <Folder Include="MCAL\TIM0\" />
   </ItemGroup>

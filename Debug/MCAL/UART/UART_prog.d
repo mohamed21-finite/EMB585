@@ -1,0 +1,1 @@
+MCAL/UART/UART_prog.d MCAL/UART/UART_prog.o: ../MCAL/UART/UART_prog.c

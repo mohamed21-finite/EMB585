@@ -8,11 +8,55 @@
 #include "main.h"
 
 
+volatile u16 T_on = 0;
+volatile u16 T_total = 0 ;
 
-/*void app()
+void app()
 {
-	analog = ADC ;
-	ADC_voidReadChannel_Interrupt(ADC0);
+	static u8 count = 0;
+	count++ ;
+	if (count == 1)
+	{
+		TIM1_voidReset();
+		TIM1_voidSelectEdge(TIM1_FALLING_EDGE);
+	}
+	else if (count == 2)
+	{
+		T_on = TIM1_u16ReadICR();
+		TIM1_voidSelectEdge(TIM1_RISING_EDGE);
+		
+	}
+	else if (count == 3)
+	{
+		T_total = TIM1_u16ReadICR();
+		count = 0 ;
+	}
+}
+/*volatile u16 T_on = 0 ;
+volatile u16 T_total = 0; 
+
+void app()
+{
+	static u8 count = 0;
+	count++ ;
+	if (count == 1)
+	{
+		TIM1_voidReset();
+		
+		EXTI_voidInit(INT_0, FALLING_EDGE);
+	}
+	else if (count == 2)
+	{
+		T_on = TIM1_u16ReadVal();
+		
+		EXTI_voidInit(INT_0, RISING_EDGE);
+	}
+	else if (count == 3)
+	{
+		T_total = TIM1_u16ReadVal();
+		
+		count = 0 ;
+	}
 }*/
 /*u8 count = 0;
 void app0()
@@ -138,6 +182,7 @@ void TIM0_app()
 	}
 }
 */
+
 int main(void)
 {
 	
@@ -255,10 +300,48 @@ int main(void)
 
 	u16 val = 0;
 	u16 analog = ADC_u16ReadChannel(ADC0);*/
+	
+	/*DIO_voidSetPortDir(DIO_PORTA,0xF0);
+	DIO_voidSetPortDir(DIO_PORTB,0x0F);
+	LCD_voidInit();
+	DIO_voidSetPinDir(DIO_PORTD,DIO_PIN2,INPUT);
+	EXTI_voidInit(INT_0,RISING_EDGE);
+	
+	GI_voidEnable();
+	EXTI0_voidEnable();
+	EXTI_CallBack(app,INT_0);
+	TIM1_voidInit();
+	u8 duty = 0 ;
+	u8 f = 0 ;*/
+	
+	DIO_voidSetPortDir(DIO_PORTA,0xF0);
+	DIO_voidSetPortDir(DIO_PORTB,0x0F);
+	LCD_voidInit();
+	DIO_voidSetPinDir(DIO_PORTD,DIO_PIN6,INPUT);
+	
+	TIM1_voidInit_Input_Capture();
+	TIM1_voidSelectEdge(TIM1_RISING_EDGE);
+	GI_voidEnable();
+	TIM1_voidICRReset();
+	TIM1_voidCallBack(app);
+	
+	u8 duty = 0 ;
+	u8 f = 0 ;
     while (1) 
     {
-		LED_voidToggle(DIO_PORTD, DIO_PIN0);
-		_delay_ms(2000);
+		
+		
+		
+		duty = ((f32)T_on / T_total) * 100 ;
+		
+		f = 1000000 / (4 * T_total) ;
+		//T_on = (f32)(T_on / 4000000);
+		//T_total =(f32)(T_total / 4000000);
+		TIM0_voidPWM(FAST_PWM, 50);
+		LCD_voidGotoXY(0,0);
+		LCD_voidSendNumber(duty);
+		LCD_voidGotoXY(0,1);
+		LCD_voidSendNumber(f);
 		
 		/*analog = ADC_u16ReadChannel(ADC0);
 		val = (2000 + (f32) analog  * 400 * 5 / 1023);
@@ -321,7 +404,7 @@ int main(void)
 		}
 	}*/
 	}
-}
+  }
 
 /*void __vector_11(void)__attribute__((signal));
 void __vector_11(void)
@@ -386,97 +469,3 @@ void __vector_11(void)
 }*/
 
 
-void alarm_display(u16 Time_seconds)
-{
-	u8 hours = 0 ;
-	u8 minutes = 0 ;
-	u8 seconds = 0 ;
-	
-	while(Time_seconds >= 3600)
-	{
-		Time_seconds -= 3600 ;
-		hours++ ;
-	}
-	while(Time_seconds >= 60)
-	{
-		Time_seconds -= 60;
-		minutes++ ;
-	}
-	seconds = Time_seconds ;
-	
-	
-	/*Hours Display*/
-	if(hours < 10 && hours > 0)
-	{
-		LCD_voidGotoXY(0,0);
-		LCD_voidSendNumber(0);
-		LCD_voidGotoXY(1,0);
-		LCD_voidSendNumber(hours);
-		LCD_voidGotoXY(2,0);
-		LCD_voidstring(":");
-	}
-	else if(hours >= 10)
-	{
-			LCD_voidGotoXY(0,0);
-			LCD_voidSendNumber(hours);
-			LCD_voidGotoXY(2,0);
-			LCD_voidstring(":");
-	}
-	else 
-	{
-			LCD_voidGotoXY(0,0);
-			LCD_voidSendNumber(0);
-			LCD_voidGotoXY(1,0);
-			LCD_voidSendNumber(0);
-			LCD_voidGotoXY(2,0);
-			LCD_voidstring(":");
-	}
-	
-	/*Minutes Display*/
-	if(minutes < 10 && minutes > 0)
-	{
-		LCD_voidGotoXY(3,0);
-		LCD_voidSendNumber(0);
-		LCD_voidGotoXY(4,0);
-		LCD_voidSendNumber(minutes);
-		LCD_voidGotoXY(5,0);
-		LCD_voidstring(":");
-	}
-	else if(minutes >= 10)
-	{
-		LCD_voidGotoXY(3,0);
-		LCD_voidSendNumber(minutes);
-		LCD_voidGotoXY(5,0);
-		LCD_voidstring(":");
-	}
-	else
-	{
-		LCD_voidGotoXY(3,0);
-		LCD_voidSendNumber(0);
-		LCD_voidGotoXY(4,0);
-		LCD_voidSendNumber(0);
-		LCD_voidGotoXY(5,0);
-		LCD_voidstring(":");
-	}
-	
-	/*Seconds Display*/
-	if(seconds < 10 && seconds > 0)
-	{
-		LCD_voidGotoXY(6,0);
-		LCD_voidSendNumber(0);
-		LCD_voidGotoXY(7,0);
-		LCD_voidSendNumber(seconds);
-	}
-	else if(seconds >= 10)
-	{
-		LCD_voidGotoXY(6,0);
-		LCD_voidSendNumber(seconds);
-	}
-	else
-	{
-		LCD_voidGotoXY(6,0);
-		LCD_voidSendNumber(0);
-		LCD_voidGotoXY(7,0);
-		LCD_voidSendNumber(0);
-	}
-}

@@ -26,3 +26,5 @@ MCAL\TIM0\TIM0_prog.c
 
 MCAL\TIM1\TIM1_prog.c
 
+MCAL\UART\UART_prog.c
+
