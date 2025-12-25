@@ -13,6 +13,7 @@
 #define UCSRC_REG	 *((volatile u8*)0x40)
 #define UCSRA_REG	 *((volatile u8*)0x2B)
 #define UCSRB_REG	 *((volatile u8*)0x2A)
+#define UBRRL_REG	 *((volatile u8*)0x29)
 
 
 

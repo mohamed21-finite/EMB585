@@ -22,9 +22,13 @@ MCAL\EXTI\EXTI_prog.c
 
 MCAL\GI\GI_prog.c
 
+MCAL\SPI\SPI_prog.c
+
 MCAL\TIM0\TIM0_prog.c
 
 MCAL\TIM1\TIM1_prog.c
 
 MCAL\UART\UART_prog.c
+
+MCAL\WDT\WDT_prog.c
 

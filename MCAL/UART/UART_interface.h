@@ -13,8 +13,9 @@ void UART_voidInit(void);
 
 void UART_voidTX(u8 copy_u8data);
 
-void UART_u8RX(void);
+u8 UART_u8RX(void);
 
+void UART_voidSendString(char *ptr_string);
 
 
 #endif /* UART_INTERFACE_H_ */

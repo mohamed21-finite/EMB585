@@ -7,7 +7,7 @@
 
 #include "main.h"
 
-
+/*
 volatile u16 T_on = 0;
 volatile u16 T_total = 0 ;
 
@@ -31,7 +31,7 @@ void app()
 		T_total = TIM1_u16ReadICR();
 		count = 0 ;
 	}
-}
+}*/
 /*volatile u16 T_on = 0 ;
 volatile u16 T_total = 0; 
 
@@ -313,7 +313,7 @@ int main(void)
 	TIM1_voidInit();
 	u8 duty = 0 ;
 	u8 f = 0 ;*/
-	
+	/*
 	DIO_voidSetPortDir(DIO_PORTA,0xF0);
 	DIO_voidSetPortDir(DIO_PORTB,0x0F);
 	LCD_voidInit();
@@ -326,13 +326,32 @@ int main(void)
 	TIM1_voidCallBack(app);
 	
 	u8 duty = 0 ;
-	u8 f = 0 ;
+	u8 f = 0 ;*/
+	
+	/*LED_voidon(DIO_PORTA, DIO_PIN0);
+	_delay_ms(1000);
+	LED_voidoff(DIO_PORTA, DIO_PIN0);
+	_delay_ms(1000);
+	GI_voidEnable();
+	WDT_voidEnableInit();*/
+	UART_voidInit();
+	SPI_voidMasterInit();
+	u8 i = 0 ;
     while (1) 
     {
+		i = UART_u8RX() % 48;
+		_delay_ms(50);
+		SPI_voidMasterSendData(i);
+
+		
+
+		/*LED_voidon(DIO_PORTA, DIO_PIN1);
+		//_delay_ms(1000);
+		wdt_reset();
+		//WDT_voidDisable();*/
 		
 		
-		
-		duty = ((f32)T_on / T_total) * 100 ;
+		/*duty = ((f32)T_on / T_total) * 100 ;
 		
 		f = 1000000 / (4 * T_total) ;
 		//T_on = (f32)(T_on / 4000000);
@@ -341,7 +360,7 @@ int main(void)
 		LCD_voidGotoXY(0,0);
 		LCD_voidSendNumber(duty);
 		LCD_voidGotoXY(0,1);
-		LCD_voidSendNumber(f);
+		LCD_voidSendNumber(f);*/
 		
 		/*analog = ADC_u16ReadChannel(ADC0);
 		val = (2000 + (f32) analog  * 400 * 5 / 1023);

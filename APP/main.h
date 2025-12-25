@@ -23,6 +23,9 @@
 #include "../MCAL/ADC/ADC_reg.h"
 #include "../MCAL/TIM0/TIM0_interface.h"
 #include "../MCAL/TIM1/TIM1_interface.h"
+#include "../MCAL/WDT/WDT_interface.h"
+#include "../MCAL/UART/UART_interface.h"
+#include "../MCAL/SPI/SPI_interface.h"
 
 #include "../HAL/LCD/LCD_interface.h"
 #include "../HAL/LCD/LCD_config.h"
