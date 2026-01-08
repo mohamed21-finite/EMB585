@@ -6,6 +6,8 @@ APP\main.c
 
 HAL\DCMOTOR\DCMOTOR_prog.c
 
+HAL\EEPROM\EEPROM_prog.c
+
 HAL\KPD\KPD_prog.c
 
 HAL\LCD\LCD_prog.c
@@ -27,6 +29,8 @@ MCAL\SPI\SPI_prog.c
 MCAL\TIM0\TIM0_prog.c
 
 MCAL\TIM1\TIM1_prog.c
+
+MCAL\TWI\TWI_prog.c
 
 MCAL\UART\UART_prog.c
 

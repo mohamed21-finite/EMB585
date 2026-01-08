@@ -135,6 +135,12 @@
     <Compile Include="HAL\DCMOTOR\DCMOTOR_prog.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\EEPROM\EEPROM_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\EEPROM\EEPROM_prog.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="HAL\KPD\KPD_config.h">
       <SubType>compile</SubType>
     </Compile>
@@ -240,6 +246,18 @@
     <Compile Include="MCAL\TIM1\TIM1_reg.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCAL\TWI\TWI_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\TWI\TWI_private.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\TWI\TWI_prog.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCAL\TWI\TWI_reg.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="MCAL\UART\UART_interface.h">
       <SubType>compile</SubType>
     </Compile>
@@ -265,6 +283,7 @@
     <Folder Include="HAL\LCD" />
     <Folder Include="HAL\KPD" />
     <Folder Include="HAL\DCMOTOR" />
+    <Folder Include="HAL\EEPROM" />
     <Folder Include="HAL\SSD" />
     <Folder Include="MCAL" />
     <Folder Include="APP" />
@@ -273,6 +292,7 @@
     <Folder Include="MCAL\GI" />
     <Folder Include="MCAL\EXTI" />
     <Folder Include="MCAL\ADC" />
+    <Folder Include="MCAL\TWI" />
     <Folder Include="MCAL\SPI" />
     <Folder Include="MCAL\WDT" />
     <Folder Include="MCAL\UART" />

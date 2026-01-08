@@ -334,17 +334,33 @@ int main(void)
 	_delay_ms(1000);
 	GI_voidEnable();
 	WDT_voidEnableInit();*/
-	UART_voidInit();
+	/*UART_voidInit();
 	SPI_voidMasterInit();
-	u8 i = 0 ;
+	u8 i = 0 ;*/
+	
+	
+	TWI_voidMasterInit(0);
+	
+	EEPROM_voidSendData(0, 'A');
+	
     while (1) 
     {
-		i = UART_u8RX() % 48;
-		_delay_ms(50);
-		SPI_voidMasterSendData(i);
-
 		
-
+		u8 val = EEPROM_u8ReadData(0);
+		
+		if(val == 'A')
+		{
+			LED_voidon(DIO_PORTD, DIO_PIN0);
+		}
+		else
+		{
+			LED_voidoff(DIO_PORTD, DIO_PIN0);
+		}
+		
+		/*i = UART_u8RX() % 48;
+		_delay_ms(50);
+		SPI_voidMasterSendData(i);*/
+		
 		/*LED_voidon(DIO_PORTA, DIO_PIN1);
 		//_delay_ms(1000);
 		wdt_reset();

@@ -26,6 +26,7 @@
 #include "../MCAL/WDT/WDT_interface.h"
 #include "../MCAL/UART/UART_interface.h"
 #include "../MCAL/SPI/SPI_interface.h"
+#include "../MCAL/TWI/TWI_interface.h"
 
 #include "../HAL/LCD/LCD_interface.h"
 #include "../HAL/LCD/LCD_config.h"
@@ -36,6 +37,7 @@
 #include "../HAL/DCMOTOR/DCMOTOR_interface.h"
 #include "../HAL/DCMOTOR/DCMOTOR_config.h"
 
+#include "../HAL/EEPROM/EEPROM_interface.h"
 #define F_CPU 16000000UL
 #include <util/delay.h>
 
